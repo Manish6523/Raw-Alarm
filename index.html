@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            color: blue;
+        }
+        @media (max-width:600px){
+            body,html{
+                box-sizing: border-box;
+            }
+            button{
+                padding: 10px 20px;
+                font-size: 20px;
+                margin-right: 20px;
+            }
+            .main{
+                MARGIN: 150px 0PX;
+                border: 2px solid red;
+                padding: 5px;
+            }
+            input{
+                outline-color:red ;
+            }
+        }
+    </style>
+    <div class="main">
+        <button id="playy">play</button><titlee><b>Alarm Clock</b></titlee>
+    <!-- <input id="filess" type="file" accept="audio/mp3"> -->
+    <div class="imp" style="margin: 30px 0px ;">
+        <input placeholder="hours" style="width: 80px; height: 80px; font-size: 25px; padding: 10px;" id="h" type="number">
+        <input placeholder="min  " style="width: 80px; height: 80px; font-size: 25px; padding: 10px;" id="m" type="number">
+        <input placeholder="sec  " style="width: 80px; height: 80px; font-size: 25px; padding: 10px;" id="s" type="number">
+        <button id="set" style="margin-top: 20px;">SET</button>
+    </div>
+    <button id="pausee">pause</button>
+    <H1>00:00:00</H1>
+    <H2>alarm set At <span></span></H2>
+</div>
+    <script>var audio = new Audio('alarm.mp3');
+        document.querySelector("#playy").addEventListener("click",()=>{
+            audio.play();
+        })
+        document.querySelector("#pausee").addEventListener("click",()=>{
+            audio.pause();
+        })
+        function time(){
+            var d = new Date();
+            var s = d.getSeconds();
+            var m = d.getMinutes();
+            var h = d.getHours();
+            let ho = h-12;
+            document.querySelector("h1").innerHTML=(h-12 + ":0" + m + ":" + s);
+            let setH = document.querySelector("#h").value
+            let setM = document.querySelector("#m").value
+            let setS = document.querySelector("#s").value;
+        
+            if(ho<10){
+                document.querySelector("h1").innerHTML=`0${ho}:${m}:${s}`;
+            }if(m<10){
+                document.querySelector("h1").innerHTML=`${ho}:0${m}:${s}`;
+            }if(s<10){
+                document.querySelector("h1").innerHTML=`${ho}:${m}:0${s}`;
+            }
+            if(ho==setH && m==setM && s==setS){
+                audio.play()
+            }
+        
+        
+            document.querySelector("#set").addEventListener("click",()=>{
+                document.querySelector("span").innerHTML=(`${setH}H ${setM}M`);
+            })
+        }
+        setInterval(time,1000);
+        </script>
+</body>
+</html>
